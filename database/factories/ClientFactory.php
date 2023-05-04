@@ -22,9 +22,15 @@ class ClientFactory extends Factory
     public function definition()
     {
         return [
+            'document' => $this->faker->document,
             'name' => $this->faker->name,
+            'age' => $this->faker->age,
+            'gender' => $this->faker->gender,
             'email' => $this->faker->email,
             'phone' => $this->faker->phoneNumber,
+            'city' => $this->faker->city,
+            'pathology' => $this->faker->pathology,
+            
         ];
     }
 }

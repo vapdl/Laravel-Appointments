@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\User;
+use App\Role;
 use App\Appointment;
 use App\Client;
 use App\Employee;
@@ -10,7 +11,7 @@ use App\Http\Requests\MassDestroyAppointmentRequest;
 use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
 use App\Service;
-use Gate;
+use Gate, Auth;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
@@ -19,8 +20,35 @@ class AppointmentsController extends Controller
 {
     public function index(Request $request)
     {
+        // Para buscar el id del médico a partir del email
+        $use_email = Auth::user()->email;
+        $employee_e = Employee::all();
+        foreach ($employee_e as $email_emp):
+            if ($email_emp->email == $use_email):
+                $employee_id = $email_emp->id;
+            endif;
+        endforeach;
+        // --
+        // Para saber el rol del usuario
+        $rol_u = Auth::user()->rol->id;
+
+
         if ($request->ajax()) {
-            $query = Appointment::with(['client', 'employee', 'services'])->select(sprintf('%s.*', (new Appointment)->table));
+            switch ($rol_u) {
+                // Para el caso del Rol Admin
+                case '1':
+                    $query = Appointment::with(['client', 'employee', 'services'])->select(sprintf('%s.*', (new Appointment)->table));
+                    break;
+                // Para el caso del Rol Medico
+                case '2':
+                    $query = Appointment::with(['client', 'employee', 'services'])->where('employee_id', $employee_id)->select(sprintf('%s.*', (new Appointment)->table));
+                    break;
+                // Para el caso del Rol Paciente
+                case '3':
+                    $query = Appointment::with(['client', 'employee', 'services'])->where('client_id', Auth::id())->select(sprintf('%s.*', (new Appointment)->table));
+                    break;
+            }
+            
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');

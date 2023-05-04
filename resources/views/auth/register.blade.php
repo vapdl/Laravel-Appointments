@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card-group">
@@ -10,10 +11,10 @@
                             {{ \Session::get('message') }}
                         </p>
                     @endif
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
                         <h1>{{ trans('panel.site_title') }}</h1>
-                        <p class="text-muted">{{ trans('global.login') }}</p>
+                        <p class="text-muted">{{ trans('global.register') }}</p>
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -41,28 +42,19 @@
                             @endif
                         </div>
 
-                        <div class="input-group mb-4">
-                            <div class="form-check checkbox">
-                                <input class="form-check-input" name="remember" type="checkbox" id="remember" style="vertical-align: middle;" />
-                                <label class="form-check-label" for="remember" style="vertical-align: middle;">
-                                    {{ trans('global.remember_me') }}
-                                </label>
-                            </div>
-                        </div>
-
                         <div class="row">
                             <div class="col-6">
                                 <button type="submit" class="btn btn-primary px-4">
-                                    {{ trans('global.login') }}
+                                    {{ trans('global.register') }}
                                 </button>
                             </div>
-
                             <div class="col-6 text-right">
-                                <a class="btn btn-link px-0" href="{{ route('password.request') }}">
-                                    {{ trans('global.forgot_password') }}
+                                <a class="btn btn-link px-0" href="{{ route('login') }}">
+                                    {{ trans('global.login_account') }}
                                 </a>
 
                             </div>
+
                         </div>
                     </form>
                 </div>

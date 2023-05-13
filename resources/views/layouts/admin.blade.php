@@ -20,6 +20,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
+    
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
 
     <!-- PWA assets  -->
@@ -51,7 +52,7 @@
                       src="{{ asset('img/undraw_profile.svg') }}">
               </a>
               <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+              {{-- <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                   aria-labelledby="userDropdown">
                   <a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                       <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -60,7 +61,7 @@
                   <form id="logout-form" action="{{ route('logout') }}" method="post">
                       @csrf
                   </form>
-              </div>
+              </div>  --}}
             </li>
 
             @if(count(config('panel.available_languages', [])) > 1)
@@ -143,7 +144,8 @@
   let colvisButtonTrans = '{{ trans('global.datatables.colvis') }}'
 
   let languages = {
-    'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
+    'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json',
+    'es': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json',
   };
 
   $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn' })

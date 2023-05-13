@@ -4,6 +4,10 @@ Route::redirect('/', '/login');
 Route::redirect('/home', '/admin');
 Auth::routes(['register' => true]);
 
+Route::get('/offline', function() {
+    return view('vendor/laravelpwa/offline');
+});
+
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
     // Permissions
@@ -36,4 +40,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('appointments', 'AppointmentsController');
 
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
+    
+    // SystemConsultation
+    //Route::get('system-consultation', 'SystemConsultationController@index')->name('systemConsultation');
+    Route::resource('consultation', 'SystemConsultationController');
 });

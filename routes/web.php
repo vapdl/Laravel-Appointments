@@ -41,7 +41,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     
-    // SystemConsultation
+    // SystemConsultations
     //Route::get('system-consultation', 'SystemConsultationController@index')->name('systemConsultation');
     Route::resource('consultation', 'SystemConsultationController');
     

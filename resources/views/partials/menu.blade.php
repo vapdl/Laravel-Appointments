@@ -100,6 +100,16 @@
                     {{ trans('global.systemCalendar') }}
                 </a>
             </li>
+            @can('consultation_access')
+                <li class="nav-item">
+                    <a href="{{ route("admin.consultation.index") }}" class="nav-link {{ request()->is('admin/consultation') || request()->is('admin/consultation/*') ? 'active' : '' }}">
+                        <i class="nav-icon fa-fw fas fa-calendar">
+
+                        </i>
+                        {{ trans('global.systemConsultation') }}
+                    </a>
+                </li>
+            @endcan
             <li class="nav-item">
                 <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                     <i class="nav-icon fas fa-fw fa-sign-out-alt">

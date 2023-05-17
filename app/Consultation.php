@@ -6,12 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Client extends Model
+class Consultation extends Model
 {
-    use SoftDeletes, HasFactory;
-
-    public $table = 'clients';
-
+    use HasFactory;
     protected $dates = [
         'created_at',
         'updated_at',
@@ -19,20 +16,17 @@ class Client extends Model
     ];
 
     protected $fillable = [
-        'name',
-        'age',
-        'phone',
-        'email',
-        'document',
-        'gender',
-        'city',
-        'pathology',
+        'title',
+        'nday',
+        'employee_id',
+        'start',
+        'end',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    public function employee()
+    public function consultation_employee()
     {
         return $this->belongsTo(Employee::class, 'employee_id');
     }

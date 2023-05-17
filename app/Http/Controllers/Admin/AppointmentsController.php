@@ -29,6 +29,7 @@ class AppointmentsController extends Controller
             endif;
         endforeach;
         // --
+        
         // Para saber el rol del usuario
         $rol_u = Auth::user()->rol->id;
 
